@@ -9,8 +9,9 @@ public class DamselRescuingKnight implements Knight {
 
     private RescueDamselQuest quest;
 
+    //这种程序缺陷：与RescueDamselQuest紧耦合
     public DamselRescuingKnight(RescueDamselQuest quest) {
-        this.quest = quest;
+        this.quest = new RescueDamselQuest();
     }
 
     @Override

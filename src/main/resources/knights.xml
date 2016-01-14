@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
     <bean id="knight" class="com.springinaction.knights.BraveKnight">
@@ -9,5 +13,17 @@
     </bean>
 
     <bean id="quest" class="com.springinaction.knights.SlayDragonQuest" />
+
+    <bean id="minstrel" class="com.springinaction.knights.Minstrel" />
+
+    <aop:config>
+        <!--声明吟游诗人是一个切面-->
+        <aop:aspect ref="minstrel">
+            <!--声明对所有的mebarkOnQuest方法执行前后，都需要嵌入AOP代码-->
+            <aop:pointcut id="embark" expression="execution(* *.embarkOnQuest(..))" />
+            <aop:before method="singBeforeQuest" pointcut-ref="embark" />
+            <aop:after method="singAfterQuest" pointcut-ref="embark"/>
+        </aop:aspect>
+    </aop:config>
 
 </beans>

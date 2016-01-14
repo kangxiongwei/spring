@@ -10,6 +10,11 @@ import static org.mockito.Mockito.*;
  */
 public class BraveKnightTest {
 
+    /**
+     * 对于DamselRescuingKnight，无法实现测试，因为紧耦合，
+     * 而BraveKnight是松耦合的，因为是松耦合
+     * @throws Exception
+     */
     @Test
     public void knightShouldEmbarkOnQuest() throws Exception {
         Quest quest = mock(Quest.class);
